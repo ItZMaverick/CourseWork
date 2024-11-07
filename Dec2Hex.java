@@ -1,5 +1,7 @@
 import java.util.Scanner;
 
+System.out.println("Hi");
+
 class Dec2Hex
 {
 public static int Arg1;
