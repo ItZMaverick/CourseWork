@@ -1,8 +1,14 @@
+import java.util.logging.Logger;
+
 public class Dec2Hex {
-    public static void main(String args[]) {
+
+    // Static logger for use in the main method
+    private static final Logger logger = Logger.getLogger(Dec2Hex.class.getName());
+
+    public static void main(String[] args) {
         // Check if the user has passed any argument
         if (args.length == 0) {
-            System.out.println("No argument passed. Please provide a decimal number.");
+            logger.info("Error: InputNotValid - No argument provided");
             return;  // Exit the program if no argument is passed
         }
 
@@ -12,20 +18,18 @@ public class Dec2Hex {
             num = Integer.parseInt(args[0]);  // Parse the input argument to integer
         } catch (NumberFormatException e) {
             // Catch the exception if the input is not a valid integer
-            System.out.println("Error: Invalid input. Please provide a valid decimal number.");
+            logger.info("ERROR: InputNotValid - Invalid number format");
             return;  // Exit without throwing an exception
         }
 
         // If the number is 0, handle it explicitly
         if (num == 0) {
-            System.out.println("Hexadecimal representation is: 0");
+            logger.info("HEX = 0");
             return;
         }
 
-        // Convert the decimal number to hexadecimal, handling both positive and negative numbers
-        String hexadecimal = Integer.toHexString(num).toUpperCase();
-
-        // Print the hexadecimal result
-        System.out.println("Hexadecimal representation is: " + hexadecimal);
+        // Convert the number to hexadecimal and log it
+        String hex = Integer.toHexString(num).toUpperCase();
+        logger.info("HEX = " + hex);  // Log the hexadecimal representation
     }
 }
