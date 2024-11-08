@@ -22,20 +22,10 @@ public class Dec2Hex {
             return;
         }
 
-        // Array for hexadecimal characters
-        char[] ch = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'};
-
-        // Use StringBuilder for efficient string concatenation
-        StringBuilder hexadecimal = new StringBuilder();
-
-        // Convert the decimal number to hexadecimal
-        while (num != 0) {
-            int rem = num % 16;  // Get the remainder (hexadecimal digit)
-            hexadecimal.insert(0, ch[rem]);  // Add the hex digit to the front of the string
-            num = num / 16;  // Divide the number by 16 to get the next digit
-        }
+        // Convert the decimal number to hexadecimal, handling both positive and negative numbers
+        String hexadecimal = Integer.toHexString(num).toUpperCase();
 
         // Print the hexadecimal result
-        System.out.println("Hexadecimal representation is: " + hexadecimal.toString());
+        System.out.println("Hexadecimal representation is: " + hexadecimal);
     }
 }
