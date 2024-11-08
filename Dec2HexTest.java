@@ -1,53 +1,77 @@
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
+import java.util.logging.Logger;
+import java.util.logging.StreamHandler;
+import java.util.logging.SimpleFormatter;
+import java.util.logging.Handler;
+import java.util.logging.Formatter;
+import java.util.logging.LogRecord;
 
 import static org.junit.Assert.assertEquals;
 
 public class Dec2HexTest {
 
-    private final ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();
-    private final PrintStream standardOut = System.out;
+    private final ByteArrayOutputStream logCaptor = new ByteArrayOutputStream();
+    private final Logger logger = Logger.getLogger(Dec2Hex.class.getName());
+    private Handler logHandler;
+
+    // Custom formatter to capture only message text without log levels or timestamps
+    private static class SimpleMessageFormatter extends Formatter {
+        @Override
+        public String format(LogRecord record) {
+            return record.getMessage() + System.lineSeparator();
+        }
+    }
 
     @Before
     public void setUp() {
-        System.setOut(new PrintStream(outputStreamCaptor));  // Redirect System.out to capture output
+        // Set up a StreamHandler to capture log output with a simple message formatter
+        logHandler = new StreamHandler(logCaptor, new SimpleMessageFormatter());
+        logger.addHandler(logHandler);
     }
 
     @After
     public void tearDown() {
-        System.setOut(standardOut);  // Reset System.out back to its original state
+        // Remove the log handler after each test
+        logger.removeHandler(logHandler);
     }
 
     @Test
     public void testValidDecimalInput() {
         Dec2Hex.main(new String[]{"255"});
-        assertEquals("Hexadecimal representation is: FF", outputStreamCaptor.toString().trim());
+        logHandler.flush();
+        assertEquals("HEX = FF", logCaptor.toString().trim());
     }
 
     @Test
     public void testZeroInput() {
         Dec2Hex.main(new String[]{"0"});
-        assertEquals("Hexadecimal representation is: 0", outputStreamCaptor.toString().trim());
+        logHandler.flush();
+        assertEquals("HEX = 0", logCaptor.toString().trim());
     }
 
     @Test
     public void testNegativeDecimalInput() {
         Dec2Hex.main(new String[]{"-10"});
-        assertEquals("Hexadecimal representation is: FFFFFFF6", outputStreamCaptor.toString().trim());
+        logHandler.flush();
+        assertEquals("HEX = FFFFFFF6", logCaptor.toString().trim());
     }
 
     @Test
     public void testInvalidInput() {
         Dec2Hex.main(new String[]{"abc"});
-        assertEquals("Error: Invalid input. Please provide a valid decimal number.", outputStreamCaptor.toString().trim());
+        logHandler.flush();
+        assertEquals("ERROR: InputNotValid - Invalid number format", logCaptor.toString().trim());
     }
 
     @Test
     public void testNoArgumentPassed() {
         Dec2Hex.main(new String[]{});
-        assertEquals("No argument passed. Please provide a decimal number.", outputStreamCaptor.toString().trim());
+        logHandler.flush();
+        assertEquals("Error: InputNotValid - No argument provided", logCaptor.toString().trim());
     }
 }
