@@ -26,6 +26,12 @@ public class Dec2Hex {
 
         // Convert the number to hexadecimal and log it
         String hex = Integer.toHexString(num).toUpperCase();
-        logger.info(String.format("HEX = %s", hex)); // Log the hexadecimal representation
+	if (hex != null){
+
+        
+       logger.info(String.format("HEX = %s", hex)); // Log the hexadecimal representation
+ }
     }
+
+
 }

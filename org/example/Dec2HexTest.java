@@ -3,7 +3,6 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
 import java.util.logging.*;
 
 import static org.junit.Assert.assertEquals;
@@ -11,14 +10,14 @@ import static org.junit.Assert.assertEquals;
 public class Dec2HexTest {
 
     private final ByteArrayOutputStream logCaptor = new ByteArrayOutputStream();
-    private final Logger logger = Logger.getLogger(Dec2Hex.class.getName());
+    private final Logger logger = Logger.getLogger(Dec2Hex.class.getName()); //use dec2hex logger
     private Handler logHandler;
 
     // Custom formatter to capture only message text without log levels or timestamps
     private static class SimpleMessageFormatter extends Formatter {
         @Override
-        public String format(LogRecord record) {
-            return record.getMessage() + System.lineSeparator();
+        public String format(LogRecord theRecord) {
+            return theRecord.getMessage() + System.lineSeparator();
         }
     }
 
