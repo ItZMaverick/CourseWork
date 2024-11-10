@@ -23,15 +23,12 @@ public class Dec2Hex {
             logger.info("ERROR: InputNotValid - Invalid number format");
             return;  // Exit without throwing an exception
         }
-
         // Convert the number to hexadecimal and log it
-        String hex = Integer.toHexString(num).toUpperCase();
-	if (hex != null){
-
-        
-       logger.info(String.format("HEX = %s", hex)); // Log the hexadecimal representation
- }
+	String hex = Integer.toHexString(num).toUpperCase();
+	if (num >= 0) {
+    		logger.info(String.format("HEX = %s", hex)); // Log the hexadecimal representation for zero and positive numbers
+	} else {
+    		logger.info(String.format("HEX = %s", hex)); // Log hexadecimal for negative numbers as well
+	}
     }
-
-
 }

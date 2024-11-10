@@ -1,4 +1,5 @@
 package org.example;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -10,7 +11,7 @@ import static org.junit.Assert.assertEquals;
 public class Dec2HexTest {
 
     private final ByteArrayOutputStream logCaptor = new ByteArrayOutputStream();
-    private final Logger testLogger = Logger.getLogger(Dec2HexTest.class.getName());  // Use the test logger
+    private final Logger testLogger = Logger.getLogger(Dec2HexTest.class.getName());  // For capturing test logs
     private Handler logHandler;
 
     // Custom formatter to capture only message text without log levels or timestamps
@@ -31,18 +32,13 @@ public class Dec2HexTest {
         Logger dec2HexLogger = Logger.getLogger(Dec2Hex.class.getName()); // Get logger from Dec2Hex
         dec2HexLogger.addHandler(logHandler);
         dec2HexLogger.setLevel(Level.ALL);  // Ensure it captures all log levels
-
-        // Attach the handler to the test logger as well (though it's not strictly necessary)
-        testLogger.addHandler(logHandler);
-        testLogger.setLevel(Level.ALL);  // Ensure test logger captures all levels
     }
 
     @After
     public void tearDown() {
         // Remove the log handler after each test to prevent multiple handler issues
         Logger dec2HexLogger = Logger.getLogger(Dec2Hex.class.getName()); // Get logger from Dec2Hex
-        dec2HexLogger.removeHandler(logHandler);
-        testLogger.removeHandler(logHandler); // Clean up test logger handler
+        dec2HexLogger.removeHandler(logHandler);  // Clean up handler from Dec2Hex logger
     }
 
     @Test
