@@ -1,3 +1,5 @@
+package org.example;
+
 import java.util.logging.Logger;
 
 public class Dec2Hex {
@@ -22,14 +24,8 @@ public class Dec2Hex {
             return;  // Exit without throwing an exception
         }
 
-        // If the number is 0, handle it explicitly
-        if (num == 0) {
-            logger.info("HEX = 0");
-            return;
-        }
-
         // Convert the number to hexadecimal and log it
         String hex = Integer.toHexString(num).toUpperCase();
-	logger.info(String.format("HEX = %s", hex));   // Log the hexadecimal representation
+        logger.info(String.format("HEX = %s", hex)); // Log the hexadecimal representation
     }
 }

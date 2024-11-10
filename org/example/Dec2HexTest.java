@@ -1,15 +1,10 @@
+package org.example;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
-import java.util.logging.Logger;
-import java.util.logging.StreamHandler;
-import java.util.logging.SimpleFormatter;
-import java.util.logging.Handler;
-import java.util.logging.Formatter;
-import java.util.logging.LogRecord;
+import java.util.logging.*;
 
 import static org.junit.Assert.assertEquals;
 
@@ -31,7 +26,9 @@ public class Dec2HexTest {
     public void setUp() {
         // Set up a StreamHandler to capture log output with a simple message formatter
         logHandler = new StreamHandler(logCaptor, new SimpleMessageFormatter());
+        logHandler.setLevel(Level.ALL);  // Make sure all log levels are captured
         logger.addHandler(logHandler);
+        logger.setLevel(Level.ALL);  // Ensure logger captures all levels
     }
 
     @After
@@ -43,7 +40,7 @@ public class Dec2HexTest {
     @Test
     public void testValidDecimalInput() {
         Dec2Hex.main(new String[]{"255"});
-        logHandler.flush();
+        logHandler.flush();  // Ensure all log messages are flushed
         assertEquals("HEX = FF", logCaptor.toString().trim());
     }
 
