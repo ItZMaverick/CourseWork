@@ -25,10 +25,15 @@ public class Dec2Hex {
         }
         // Convert the number to hexadecimal and log it
 	String hex = Integer.toHexString(num).toUpperCase();
-	if (num >= 0) {
-    		logger.info(String.format("HEX = %s", hex)); // Log the hexadecimal representation for zero and positive numbers
-	} else {
-    		logger.info(String.format("HEX = %s", hex)); // Log hexadecimal for negative numbers as well
+
+	
+    	if (num != 0) {  // Log HEX for any non-zero input
+            logger.info(String.format("HEX = %s", hex));
+        } else {
+            // Log a special message for zero (could be different from other numbers)
+            logger.info("HEX = 0"); 
+        }
+
+
 	}
-    }
 }

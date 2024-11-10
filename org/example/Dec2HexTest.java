@@ -11,7 +11,6 @@ import static org.junit.Assert.assertEquals;
 public class Dec2HexTest {
 
     private final ByteArrayOutputStream logCaptor = new ByteArrayOutputStream();
-    private final Logger testLogger = Logger.getLogger(Dec2HexTest.class.getName());  // For capturing test logs
     private Handler logHandler;
 
     // Custom formatter to capture only message text without log levels or timestamps
@@ -43,36 +42,41 @@ public class Dec2HexTest {
 
     @Test
     public void testValidDecimalInput() {
+        // Run the main method with a valid decimal input
         Dec2Hex.main(new String[]{"255"});
         logHandler.flush();  // Ensure all log messages are flushed
-        assertEquals("HEX = FF", logCaptor.toString().trim());
+        assertEquals("HEX = FF", logCaptor.toString().trim());  // Check the expected log message
     }
 
     @Test
     public void testZeroInput() {
+        // Run the main method with zero as input
         Dec2Hex.main(new String[]{"0"});
         logHandler.flush();
-        assertEquals("HEX = 0", logCaptor.toString().trim());
+        assertEquals("HEX = 0", logCaptor.toString().trim());  // Check the expected log message
     }
 
     @Test
     public void testNegativeDecimalInput() {
+        // Run the main method with a negative decimal input
         Dec2Hex.main(new String[]{"-10"});
         logHandler.flush();
-        assertEquals("HEX = FFFFFFF6", logCaptor.toString().trim());
+        assertEquals("HEX = FFFFFFF6", logCaptor.toString().trim());  // Check the expected log message
     }
 
     @Test
     public void testInvalidInput() {
+        // Run the main method with invalid input (non-numeric)
         Dec2Hex.main(new String[]{"abc"});
         logHandler.flush();
-        assertEquals("ERROR: InputNotValid - Invalid number format", logCaptor.toString().trim());
+        assertEquals("ERROR: InputNotValid - Invalid number format", logCaptor.toString().trim());  // Check the expected log message
     }
 
     @Test
     public void testNoArgumentPassed() {
+        // Run the main method with no arguments
         Dec2Hex.main(new String[]{});
         logHandler.flush();
-        assertEquals("Error: InputNotValid - No argument provided", logCaptor.toString().trim());
+        assertEquals("Error: InputNotValid - No argument provided", logCaptor.toString().trim());  // Check the expected log message
     }
 }
