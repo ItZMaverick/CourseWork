@@ -1,5 +1,4 @@
 package org.example;
-
 import java.util.logging.Logger;
 
 public class Dec2Hex {
@@ -24,16 +23,18 @@ public class Dec2Hex {
             return;  // Exit without throwing an exception
         }
         // Convert the number to hexadecimal and log it
-	String hex = Integer.toHexString(num).toUpperCase();
+        String hex = Integer.toHexString(num).toUpperCase();
 
-	
-    	if (num != 0) {  // Log HEX for any non-zero input
-            logger.info(String.format("HEX = %s", hex));
+
+        if (num != 0) {  // Log HEX for any non-zero input
+	    if (logger.isLoggable(java.util.logging.Level.INFO)){
+            	logger.info(String.format("HEX = %s", hex));
+	    }
         } else {
             // Log a special message for zero (could be different from other numbers)
-            logger.info("HEX = 0"); 
+            logger.info("HEX = 0");
         }
 
 
-	}
+        }
 }
