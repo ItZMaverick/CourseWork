@@ -10,7 +10,7 @@ public class Dec2Hex {
         // Check if the user has passed any argument
         if (args.length == 0) {
             logger.info("Error: InputNotValid - No argument provided");
-              // Exit the program if no argument is passed
+            return;  // Exit the program if no argument is passed
         }
 
         // Try to parse the argument as an integer
