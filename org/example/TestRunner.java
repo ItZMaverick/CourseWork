@@ -13,7 +13,9 @@ public class TestRunner {
         // Print out the results
 	if (!result.getFailures().isEmpty()) {
             for (Failure failure : result.getFailures()) {
-                logger.info(failure.toString());
+		if(logger.isLoggable(java.util.logging.Level.INFO)){
+                	logger.info(failure.toString());
+		}
             }
         }
 
